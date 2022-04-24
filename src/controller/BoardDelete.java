@@ -19,20 +19,18 @@ import service.BoardDAO;
 /**
  * Servlet implementation class BoardRegist
  */
-@WebServlet("/boardList")
-public class BoardList extends HttpServlet {
+@WebServlet("/boardDelete")
+public class BoardDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		
-		
+		 String bNo = request.getParameter("bNo");
 		 BoardDAO dao = new BoardDAO();
-	  List<BoardDTO> list = dao.boardList();
-	  request.setAttribute("list", list);
-	  
-	  RequestDispatcher rd = request.getRequestDispatcher("board/boardList.jsp");
-	  rd.forward(request, response);
+	     dao.boarddelet(bNo);
+	     
+	     response.sendRedirect("boardList");
 	  
 	  
 	}

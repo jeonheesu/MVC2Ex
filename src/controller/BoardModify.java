@@ -19,20 +19,19 @@ import service.BoardDAO;
 /**
  * Servlet implementation class BoardRegist
  */
-@WebServlet("/boardList")
-public class BoardList extends HttpServlet {
+@WebServlet("/boardModify")
+public class BoardModify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		
-		
+		 String bNo = request.getParameter("bNo");
 		 BoardDAO dao = new BoardDAO();
-	  List<BoardDTO> list = dao.boardList();
-	  request.setAttribute("list", list);
-	  
-	  RequestDispatcher rd = request.getRequestDispatcher("board/boardList.jsp");
-	  rd.forward(request, response);
+		 BoardDTO dto =  dao.boardSelectOne(bNo);
+		 request.setAttribute("dto", dto);
+		 RequestDispatcher rd = request.getRequestDispatcher("board/boardModify.jsp");
+		 rd.forward(request, response);
+
 	  
 	  
 	}
@@ -41,7 +40,17 @@ public class BoardList extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		
+		 String bNo = request.getParameter("bNo");
+		 String bTitle = request.getParameter("bTitle");
+		 String bContent = request.getParameter("bContent");
+		 
+		  System.err.println(bNo +  "  " + bTitle +"      " + bContent );
+		  
+		  
+		  BoardDAO dao = new BoardDAO();
+		        dao.boardModify(bNo,bTitle,bContent);
+		        
+		        response.sendRedirect("boardContent?bNo=" + bNo);
 	
 	}
 

@@ -20,7 +20,7 @@ $(function(){
 		return;
 	}
 	if(bWriter == ""){
-		alert("작성자 입력 해주세요");
+	
 		return;
 	}
 	
@@ -29,8 +29,19 @@ $(function(){
 		
 	})
 	
+	$('#boardModifyBtn').click(function(){
+	 
+	  var boardModifyForm = $('#boardModifyForm');
+
+     var bTitle = $('#bTitle').val();
+	  var bContent = $('#bContent').val();
+
+      if(bTitle == "" || bContent ==""){
+	   alert("제목과 내용을 모두 적어주세요")
+    }
 	
+	  boardModifyForm.submit();
 	
-	
+	})
 	
 })

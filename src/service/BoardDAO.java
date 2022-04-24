@@ -75,13 +75,13 @@ public class BoardDAO {
 		
 		}
 		
-		public List<BoardDTO> selectAll(){
+		public List<BoardDTO> boardList(){
 			List<BoardDTO> list = new  ArrayList<BoardDTO>();
 			String sql = "SELECT * FROM boardTBL";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
-			rs= pstmt.executeQuery();
+			   rs= pstmt.executeQuery();
 			 
 		while(rs.next()) {
 			BoardDTO dto = new BoardDTO();
@@ -95,15 +95,75 @@ public class BoardDAO {
 			
 			
 		}
+		return list;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				dbClose();
+			}
+			
+			
+			
+			return list;
+			
+			
+		}
+		public BoardDTO boardSelectOne(String bNo) {
+			 BoardDTO dto = new BoardDTO();
+			String sql = "select * from boardTBL where bNo = ?";	
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(bNo));
+			rs =  pstmt.executeQuery();
+			 
+			 if(rs.next()) {
+				
+				 dto.setbNo(rs.getInt("bNo"));
+				 dto.setbTitle(rs.getString("bTitle"));
+				 dto.setbContent(rs.getString("bContent"));
+				 dto.setbWriter(rs.getString("bWriter"));
+				 dto.setbRegDate(rs.getTimestamp("bRegDate"));
+				 return dto;
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return dto;
+		 
+		
+		}
+		public void boardModify(String bNo, String bTitle, String bContent) {
+		 String sql = "update boardTBL set bTitle = ?, bContent = ? where bNo = ? ";
+		  try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bTitle);
+			pstmt.setString(2, bContent);
+			pstmt.setInt(3, Integer.parseInt(bNo));
+			pstmt.executeUpdate();
+			dbClose();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		}
+		public void boarddelet(String bNo) {
+
+			
+			 String sql = "delete from boardTBL where bNo = ?";
+			 try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(bNo));
+				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			dbClose();
-			return null;
-			
-			
 		}
+		
 	 }
 

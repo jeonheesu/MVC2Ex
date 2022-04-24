@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-     <link rel="stylesheet" href="/MVC2Ex/css/mine.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/MVC2Ex/css/mine.css">
     <title>Hello, world!</title>
   </head>
   <body>
@@ -22,7 +22,7 @@
   
      <a href="board/boardRegist.jsp" class="test btn btn-light">글 등록하러가기</a> <br>
      
-      <a href="board/list.jsp" class="test btn btn-light">게시물 보러가기</a> <br>
+      <a href="boardList" class="test btn btn-light">게시물 보러가기</a> <br>
     
  <script type="text/javascript" src="/MVC2Ex/js/mine.js"></script>
   </body>
